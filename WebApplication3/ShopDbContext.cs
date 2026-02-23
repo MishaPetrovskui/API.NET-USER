@@ -12,6 +12,11 @@ namespace ShopAPI
         public DbSet<Order> Orders { get; set; }
         public DbSet<ProductsInOrders> ProductsInOrders { get; set; }
 
+        public DbSet<Doctors> Doctors { get; set; }
+        public DbSet<Departments> Departments { get; set; }
+        public DbSet<Specializations> Specializations { get; set; }
+        public DbSet<DoctorsSpecializations> DoctorsSpecializations { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductsInOrders>()
