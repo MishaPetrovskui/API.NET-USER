@@ -27,13 +27,13 @@ namespace ShopAPI.Controllers
             return Ok(specialization);
         }
         [HttpPost]
-        public ActionResult Add([FromBody] Specializations specialization)
+        public ActionResult Add(Specializations specialization)
         {
             _service.Add(specialization);
             return Ok();
         }
         [HttpPut]
-        public ActionResult Update([FromBody] Specializations specialization)
+        public ActionResult Update(Specializations specialization)
         {
             _service.Update(specialization);
             return Ok();

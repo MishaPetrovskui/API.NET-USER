@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ShopAPI.Models;
 using ShopAPI.Services;
 
@@ -6,20 +6,20 @@ namespace ShopAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class DoctorsSpecializationsController : ControllerBase
+    public class DepartmentController : ControllerBase
     {
-        private readonly DoctorsSpecializationService _service;
-        public DoctorsSpecializationsController(DoctorsSpecializationService service)
+        private readonly DepartmentsService _service;
+        public DepartmentController(DepartmentsService service)
         {
             _service = service;
         }
         [HttpGet]
-        public ActionResult<List<DoctorsSpecializations>> GetAll()
+        public ActionResult<List<Departments>> GetAll()
         {
             return Ok(_service.GetAll());
         }
         [HttpGet("{id}")]
-        public ActionResult<DoctorsSpecializations> GetById(int id)
+        public ActionResult<Departments> GetById(int id)
         {
             var specialization = _service.GetById(id);
             if (specialization == null)
@@ -27,13 +27,13 @@ namespace ShopAPI.Controllers
             return Ok(specialization);
         }
         [HttpPost]
-        public ActionResult Add(DoctorsSpecializations specialization)
+        public ActionResult Add(Departments specialization)
         {
             _service.Add(specialization);
             return Ok();
         }
         [HttpPut]
-        public ActionResult Update(DoctorsSpecializations specialization)
+        public ActionResult Update(Departments specialization)
         {
             _service.Update(specialization);
             return Ok();

@@ -17,20 +17,24 @@ namespace ShopAPI
         public DbSet<Specializations> Specializations { get; set; }
         public DbSet<DoctorsSpecializations> DoctorsSpecializations { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<ProductsInOrders>()
-                .HasKey(p => new { p.OrderId, p.ProductId });
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    modelBuilder.Entity<ProductsInOrders>()
+        //        .HasKey(p => new { p.OrderId, p.ProductId });
 
-            modelBuilder.Entity<ProductsInOrders>()
-                .HasOne(p => p.Order)
-                .WithMany(o => o.ProductsInOrders)
-                .HasForeignKey(p => p.OrderId);
+        //    modelBuilder.Entity<ProductsInOrders>()
+        //        .HasOne(p => p.Order)
+        //        .WithMany(o => o.ProductsInOrders)
+        //        .HasForeignKey(p => p.OrderId);
 
-            modelBuilder.Entity<ProductsInOrders>()
-                .HasOne(p => p.Product)
-                .WithMany()
-                .HasForeignKey(p => p.ProductId);
-        }
+        //    modelBuilder.Entity<ProductsInOrders>()
+        //        .HasOne(p => p.Product)
+        //        .WithMany()
+        //        .HasForeignKey(p => p.ProductId);
+        //    modelBuilder.Entity<ProductsInOrders>()
+        //        .Property(p => p.Quantity)
+        //        .IsRequired();
+
+        //}
     }
 }

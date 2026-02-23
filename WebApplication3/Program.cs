@@ -18,7 +18,10 @@ builder.Services.AddDbContext<ShopDbContext>(options =>
 
 builder.Services.AddScoped<ProductService>();
 builder.Services.AddScoped<OrderService>();
-
+builder.Services.AddScoped<DoctorService>();
+builder.Services.AddScoped<DepartmentsService>();
+builder.Services.AddScoped<DoctorsSpecializationService>();
+builder.Services.AddScoped<SpecializationService>();
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())

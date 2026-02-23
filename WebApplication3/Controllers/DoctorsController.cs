@@ -16,13 +16,13 @@ namespace ShopAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Order>> GetOrders()
+        public ActionResult<List<Doctors>> GetDoctors()
         {
             return Ok(_doctorService.GetAll());
         }
 
         [HttpGet("{id}")]
-        public ActionResult<Order> GetOrder(int id)
+        public ActionResult<Doctors> GetDoctor(int id)
         {
             var order = _doctorService.GetById(id);
             if (order == null)
@@ -31,19 +31,19 @@ namespace ShopAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateOrder([FromBody] Doctors doctor)
+        public ActionResult CreateDoctor(Doctors doctor)
         {
             _doctorService.Add(doctor);
             return Ok();
         }
         [HttpPost]
-        public ActionResult UpdateOrder([FromBody] Doctors doctor)
+        public ActionResult UpdateDoctor(Doctors doctor)
         {
             _doctorService.Update(doctor);
             return Ok();
         }
         [HttpPost("{id}")]
-        public ActionResult DeleteOrder(int id)
+        public ActionResult DeleteDoctor(int id)
         {
             _doctorService.Delete(id);
             return Ok();
