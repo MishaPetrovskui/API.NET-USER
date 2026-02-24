@@ -9,37 +9,39 @@ namespace ShopAPI.Controllers
     public class DoctorsSpecializationsController : ControllerBase
     {
         private readonly DoctorsSpecializationService _service;
+
         public DoctorsSpecializationsController(DoctorsSpecializationService service)
         {
             _service = service;
         }
+
         [HttpGet]
-        public ActionResult<List<DoctorsSpecializations>> GetAll()
-        {
-            return Ok(_service.GetAll());
-        }
+        public ActionResult<List<DoctorsSpecializations>> Get() =>
+            Ok(_service.GetAll());
+
         [HttpGet("{id}")]
-        public ActionResult<DoctorsSpecializations> GetById(int id)
+        public ActionResult<DoctorsSpecializations> Get(int id)
         {
-            var specialization = _service.GetById(id);
-            if (specialization == null)
-                return NotFound();
-            return Ok(specialization);
+            var item = _service.GetById(id);
+            return item == null ? NotFound() : Ok(item);
         }
+
         [HttpPost]
-        public ActionResult Add(DoctorsSpecializations specialization)
+        public IActionResult Post(DoctorsSpecializations item)
         {
-            _service.Add(specialization);
+            _service.Add(item);
             return Ok();
         }
+
         [HttpPut]
-        public ActionResult Update(DoctorsSpecializations specialization)
+        public IActionResult Put(DoctorsSpecializations item)
         {
-            _service.Update(specialization);
+            _service.Update(item);
             return Ok();
         }
+
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             _service.Delete(id);
             return Ok();

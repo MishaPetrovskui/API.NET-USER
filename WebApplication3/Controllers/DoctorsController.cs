@@ -8,44 +8,42 @@ namespace ShopAPI.Controllers
     [Route("[controller]")]
     public class DoctorsController : ControllerBase
     {
-        private readonly DoctorService _doctorService;
+        private readonly DoctorService _service;
 
-        public DoctorsController(DoctorService doctorService)
+        public DoctorsController(DoctorService service)
         {
-            _doctorService = doctorService;
+            _service = service;
         }
 
         [HttpGet]
-        public ActionResult<List<Doctors>> GetDoctors()
-        {
-            return Ok(_doctorService.GetAll());
-        }
+        public ActionResult<List<Doctors>> Get() =>
+            Ok(_service.GetAll());
 
         [HttpGet("{id}")]
-        public ActionResult<Doctors> GetDoctor(int id)
+        public ActionResult<Doctors> Get(int id)
         {
-            var order = _doctorService.GetById(id);
-            if (order == null)
-                return NotFound();
-            return Ok(order);
+            var doctor = _service.GetById(id);
+            return doctor == null ? NotFound() : Ok(doctor);
         }
 
         [HttpPost]
-        public ActionResult CreateDoctor(Doctors doctor)
+        public IActionResult Post(Doctors doctor)
         {
-            _doctorService.Add(doctor);
+            _service.Add(doctor);
             return Ok();
         }
-        [HttpPost]
-        public ActionResult UpdateDoctor(Doctors doctor)
+
+        [HttpPut]
+        public IActionResult Put(Doctors doctor)
         {
-            _doctorService.Update(doctor);
+            _service.Update(doctor);
             return Ok();
         }
-        [HttpPost("{id}")]
-        public ActionResult DeleteDoctor(int id)
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            _doctorService.Delete(id);
+            _service.Delete(id);
             return Ok();
         }
     }
