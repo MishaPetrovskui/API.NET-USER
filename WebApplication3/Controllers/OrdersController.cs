@@ -36,7 +36,15 @@ namespace ShopAPI.Controllers
             var (success, error, order) = _orderService.Create(dto);
             if (!success)
                 return BadRequest(error);
-            return Ok(order);
+            return CreatedAtAction(nameof(GetOrder), new { id = order!.Id }, order);
+        }
+        [HttpDelete("{id}")]
+        public ActionResult DeleteOrder(int id)
+        {
+            var order = _orderService.GetById(id);
+            if (order == null) return NotFound();
+            _orderService.Delete(id);
+            return Ok();
         }
     }
 }

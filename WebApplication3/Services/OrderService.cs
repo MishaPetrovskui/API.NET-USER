@@ -59,5 +59,20 @@ namespace ShopAPI.Services
 
             return (true, string.Empty, order);
         }
+        public bool Delete(int id)
+        {
+            var order = GetById(id);
+            if (order == null) return false;
+            foreach (var item in order.ProductsInOrders)
+            {
+                var product = _context.Products.Find(item.ProductId);
+                if (product != null)
+                    product.Stock += item.Quantity;
+            }
+
+            _context.Orders.Remove(order);
+            _context.SaveChanges();
+            return true;
+        }
     }
 }
