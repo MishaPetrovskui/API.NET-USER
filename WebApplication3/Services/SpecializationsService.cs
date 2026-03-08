@@ -1,3 +1,4 @@
+using ShopAPI.DTOs;
 using ShopAPI.Models;
 
 namespace ShopAPI.Services
@@ -37,6 +38,19 @@ namespace ShopAPI.Services
                 _context.Specializations.Remove(item);
                 _context.SaveChanges();
             }
+        }
+
+        public List<SpecializationWithCountDto>? GetWithDoctorCount()
+        {
+            var specs = _context.Specializations.ToList();
+            if (!specs.Any()) return null;
+
+            return specs.Select(s => new SpecializationWithCountDto
+            {
+                Id = s.Id,
+                Name = s.Name,
+                DoctorCount = _context.DoctorsSpecializations.Count(ds => ds.SpecializationID == s.Id)
+            }).ToList();
         }
     }
 }

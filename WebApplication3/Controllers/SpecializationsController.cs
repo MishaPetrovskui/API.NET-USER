@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
+using ShopAPI.DTOs;
 using ShopAPI.Models;
 using ShopAPI.Services;
 
 namespace ShopAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/specializations")]
     public class SpecializationsController : ControllerBase
     {
         private readonly SpecializationService _service;
@@ -45,6 +46,16 @@ namespace ShopAPI.Controllers
         {
             _service.Delete(id);
             return Ok();
+        }
+
+        [HttpGet("with-doctor-count")]
+        public ActionResult<List<SpecializationWithCountDto>> GetWithDoctorCount()
+        {
+            var result = _service.GetWithDoctorCount();
+            if (result == null || !result.Any())
+                return NotFound("No specializations found.");
+
+            return Ok(result);
         }
     }
 }
